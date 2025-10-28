@@ -1,0 +1,737 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ammar Saeed - Developer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+            line-height: 1.6;
+            color: #e6e6e6;
+            background: #0d1117;
+            overflow-x: hidden;
+        }
+        
+        /* Terminal Navigation */
+        .nav-terminal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #161b22;
+            border-bottom: 1px solid #30363d;
+            z-index: 1000;
+            padding: 0;
+        }
+        
+        .terminal-header {
+            background: #21262d;
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .terminal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .terminal-dot:nth-child(1) { background: #ff5f56; }
+        .terminal-dot:nth-child(2) { background: #ffbd2e; }
+        .terminal-dot:nth-child(3) { background: #27ca3f; }
+        
+        .terminal-title {
+            color: #8b949e;
+            font-size: 12px;
+            margin-left: 16px;
+        }
+        
+        .nav-container-terminal {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+        }
+        
+        .logo-terminal {
+            font-size: 18px;
+            font-weight: 600;
+            color: #58a6ff;
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .nav-links-terminal {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+        
+        .nav-links-terminal a {
+            text-decoration: none;
+            color: #8b949e;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        .nav-links-terminal a:hover {
+            color: #58a6ff;
+            background: rgba(88, 166, 255, 0.1);
+        }
+        
+        .nav-links-terminal a::before {
+            content: '$ ';
+            color: #7c3aed;
+            font-weight: bold;
+        }
+        
+        /* Hero Section - Code Style */
+        .hero-terminal {
+            background: #0d1117;
+            padding: 120px 24px 80px;
+            text-align: center;
+            margin-top: 80px;
+            position: relative;
+        }
+        
+        .hero-terminal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(88, 166, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+        }
+        
+        .hero-content-terminal {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-terminal h1 {
+            font-size: 64px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 24px;
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .hero-terminal .subtitle {
+            font-size: 20px;
+            color: #58a6ff;
+            font-weight: 500;
+            margin-bottom: 32px;
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .hero-terminal .description {
+            font-size: 16px;
+            color: #8b949e;
+            line-height: 1.8;
+            max-width: 600px;
+            margin: 0 auto;
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .code-snippet {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 40px auto;
+            max-width: 600px;
+            text-align: left;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+        }
+        
+        .code-line {
+            margin: 8px 0;
+        }
+        
+        .code-comment { color: #7d8590; }
+        .code-keyword { color: #ff7b72; }
+        .code-string { color: #a5d6ff; }
+        .code-function { color: #d2a8ff; }
+        
+        /* About Section - GitHub Style */
+        .about-terminal {
+            padding: 80px 24px;
+            background: #161b22;
+        }
+        
+        .section-container-terminal {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title-terminal {
+            font-size: 48px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #ffffff;
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .about-content-terminal {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .about-text-terminal {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 32px;
+        }
+        
+        .about-text-terminal p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #e6e6e6;
+            margin-bottom: 20px;
+        }
+        
+        .about-stats-terminal {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .stat-item-terminal {
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+        }
+        
+        .stat-number-terminal {
+            font-size: 32px;
+            font-weight: 700;
+            color: #58a6ff;
+            margin-bottom: 8px;
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .stat-label-terminal {
+            font-size: 12px;
+            color: #8b949e;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Skills Section - Tech Stack */
+        .skills-terminal {
+            padding: 80px 24px;
+            background: #0d1117;
+        }
+        
+        .skills-grid-terminal {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .skill-card-terminal {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 24px;
+            text-align: center;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        .skill-card-terminal:hover {
+            border-color: #58a6ff;
+            transform: translateY(-2px);
+        }
+        
+        .skill-card-terminal::before {
+            content: '>';
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            color: #7c3aed;
+            font-weight: bold;
+        }
+        
+        .skill-card-terminal span {
+            font-size: 14px;
+            font-weight: 500;
+            color: #e6e6e6;
+            font-family: 'Fira Code', monospace;
+        }
+        
+        /* Projects Section - GitHub Cards */
+        .projects-terminal {
+            padding: 80px 24px;
+            background: #161b22;
+        }
+        
+        .projects-grid-terminal {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .project-card-terminal {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+        
+        .project-card-terminal:hover {
+            border-color: #58a6ff;
+            transform: translateY(-2px);
+        }
+        
+        .project-header-terminal {
+            height: 160px;
+            background: linear-gradient(135deg, #161b22 0%, #21262d 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid #30363d;
+        }
+        
+        .project-header-terminal::before {
+            content: '{}';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            color: #58a6ff;
+            font-weight: bold;
+        }
+        
+        .project-content-terminal {
+            padding: 24px;
+        }
+        
+        .project-content-terminal h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #58a6ff;
+            margin-bottom: 12px;
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .project-content-terminal p {
+            font-size: 14px;
+            color: #8b949e;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        
+        .project-tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        
+        .tech-tag {
+            background: #21262d;
+            color: #8b949e;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 16px;
+        }
+        
+        .project-link-terminal {
+            color: #58a6ff;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 500;
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .project-link-terminal:hover {
+            text-decoration: underline;
+        }
+        
+        /* Contact Section - Terminal Style */
+        .contact-terminal {
+            padding: 80px 24px;
+            background: #0d1117;
+            text-align: center;
+        }
+        
+        .contact-terminal h2 {
+            color: #ffffff;
+            margin-bottom: 60px;
+        }
+        
+        .contact-info-terminal {
+            max-width: 800px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+        }
+        
+        .contact-item-terminal {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 24px;
+            transition: all 0.2s ease;
+        }
+        
+        .contact-item-terminal:hover {
+            border-color: #58a6ff;
+        }
+        
+        .contact-item-terminal p {
+            font-size: 16px;
+            color: #e6e6e6;
+            font-family: 'Fira Code', monospace;
+        }
+        
+        .social-links-terminal {
+            margin-top: 60px;
+        }
+        
+        .social-links-terminal a {
+            color: #8b949e;
+            text-decoration: none;
+            margin: 0 16px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: 'Fira Code', monospace;
+            padding: 8px 16px;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        
+        .social-links-terminal a:hover {
+            color: #58a6ff;
+            border-color: #58a6ff;
+        }
+        
+        /* Footer */
+        .footer-terminal {
+            background: #000000;
+            color: #7d8590;
+            text-align: center;
+            padding: 40px 24px;
+            font-size: 12px;
+            font-family: 'Fira Code', monospace;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container-terminal {
+                padding: 16px;
+            }
+            
+            .nav-links-terminal {
+                gap: 16px;
+            }
+            
+            .hero-terminal h1 {
+                font-size: 48px;
+            }
+            
+            .section-title-terminal {
+                font-size: 36px;
+            }
+            
+            .about-content-terminal {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .about-stats-terminal {
+                grid-template-columns: 1fr;
+            }
+            
+            .projects-grid-terminal {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Terminal Navigation -->
+    <nav class="nav-terminal">
+        <div class="terminal-header">
+            <div class="terminal-dot"></div>
+            <div class="terminal-dot"></div>
+            <div class="terminal-dot"></div>
+            <div class="terminal-title">portfolio.js</div>
+        </div>
+        <div class="nav-container-terminal">
+            <div class="logo-terminal">Ammar Saeed</div>
+            <ul class="nav-links-terminal">
+                
+                    <li><a href="#home">Home</a></li>
+                
+                    <li><a href="#about">About</a></li>
+                
+                    <li><a href="#skills">Skills</a></li>
+                
+                    <li><a href="#projects">Projects</a></li>
+                
+                    <li><a href="#contact">Contact</a></li>
+                
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-terminal">
+        <div class="hero-content-terminal">
+            <h1>Ammar Saeed</h1>
+            <div class="subtitle">Frontend Developer</div>
+            <div class="description">I build modern, responsive websites using React &amp; Tailwind CSS. Passionate about creating amazing user experiences.</div>
+            
+            <div class="code-snippet">
+                <div class="code-line">// Welcome t</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-terminal">
+        <div class="section-container-terminal">
+            <h2 class="section-title-terminal">About Me</h2>
+            <div class="about-content-terminal">
+                <div class="about-text-terminal">
+                    <p>I'm a passionate frontend developer with 3+ years of experience in creating modern web applications. I love working with React, JavaScript, and cutting-edge technologies.</p>
+                </div>
+                <div class="about-stats-terminal">
+                    <div class="stat-item-terminal">
+                        <div class="stat-number-terminal">5+</div>
+                        <div class="stat-label-terminal">Years Coding</div>
+                    </div>
+                    <div class="stat-item-terminal">
+                        <div class="stat-number-terminal">100+</div>
+                        <div class="stat-label-terminal">Commits</div>
+                    </div>
+                    <div class="stat-item-terminal">
+                        <div class="stat-number-terminal">50+</div>
+                        <div class="stat-label-terminal">Repositories</div>
+                    </div>
+                    <div class="stat-item-terminal">
+                        <div class="stat-number-terminal">24/7</div>
+                        <div class="stat-label-terminal">Coffee</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills-terminal">
+        <div class="section-container-terminal">
+            <h2 class="section-title-terminal">My Skills</h2>
+            <div class="skills-grid-terminal">
+                
+                    <div class="skill-card-terminal">
+                        <span>React</span>
+                    </div>
+                
+                    <div class="skill-card-terminal">
+                        <span>JavaScript</span>
+                    </div>
+                
+                    <div class="skill-card-terminal">
+                        <span>HTML5</span>
+                    </div>
+                
+                    <div class="skill-card-terminal">
+                        <span>CSS3</span>
+                    </div>
+                
+                    <div class="skill-card-terminal">
+                        <span>Node.js</span>
+                    </div>
+                
+                    <div class="skill-card-terminal">
+                        <span>MongoDB</span>
+                    </div>
+                
+                    <div class="skill-card-terminal">
+                        <span>Git</span>
+                    </div>
+                
+                    <div class="skill-card-terminal">
+                        <span>Figma</span>
+                    </div>
+                
+                    <div class="skill-card-terminal">
+                        <span>Tailwind</span>
+                    </div>
+                
+                    <div class="skill-card-terminal">
+                        <span>Bootstrap</span>
+                    </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-terminal">
+        <div class="section-container-terminal">
+            <h2 class="section-title-terminal">My Projects</h2>
+            <div class="projects-grid-terminal">
+                <div class="project-card-terminal">
+                    <div class="project-header-terminal"></div>
+                    <div class="project-content-terminal">
+                        <h3>E-commerce Website</h3>
+                        <p>Built with React &amp; Node.js</p>
+                        <div class="project-tech-stack">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link-terminal">View Code</a>
+                            <a href="#" class="project-link-terminal">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card-terminal">
+                    <div class="project-header-terminal"></div>
+                    <div class="project-content-terminal">
+                        <h3>Portfolio Builder</h3>
+                        <p>React-based generator</p>
+                        <div class="project-tech-stack">
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">Express</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link-terminal">View Code</a>
+                            <a href="#" class="project-link-terminal">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card-terminal">
+                    <div class="project-header-terminal"></div>
+                    <div class="project-content-terminal">
+                        <h3>Task Management App</h3>
+                        <p>Full-stack productivity tool</p>
+                        <div class="project-tech-stack">
+                            <span class="tech-tag">Angular</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Redis</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link-terminal">View Code</a>
+                            <a href="#" class="project-link-terminal">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-terminal">
+        <div class="section-container-terminal">
+            <h2 class="section-title-terminal">Contact Me</h2>
+            <div class="contact-info-terminal">
+                <div class="contact-item-terminal">
+                    <p>ammar@example.com</p>
+                </div>
+                <div class="contact-item-terminal">
+                    <p>+92 300 1234567</p>
+                </div>
+                <div class="contact-item-terminal">
+                    <p>Karachi, Pakistan</p>
+                </div>
+            </div>
+            <div class="social-links-terminal">
+                <a href="https://github.com/ammar">GitHub</a>
+                <a href="https://linkedin.com/in/ammar">LinkedIn</a>
+                <a href="https://twitter.com/ammar">Twitter</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-terminal">
+        <p>© 2024 Ammar Saeed. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Terminal typing effect
+        function typeWriter(element, text, speed = 50) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            
+            type();
+        }
+
+        // Apply typing effect to code snippet
+        window.addEventListener('load', function() {
+            const codeLines = document.querySelectorAll('.code-line');
+            codeLines.forEach((line, index) => {
+                setTimeout(() => {
+                    typeWriter(line, line.textContent, 30);
+                }, index * 500);
+            });
+        });
+    </script>
+
+</body></html>
