@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema(
     lastActive: { type: Date, default: Date.now },
     isActive: { type: Boolean, default: true },
     status: { type: String, enum: ['Active', 'Inactive', 'Restricted'], default: 'Active' },
-    totalDownloads: { type: Number, default: 0 }
+    totalDownloads: { type: Number, default: 0 },
+    isBlocked: { type: Boolean, default: false }
   },
   { timestamps: true }
 );

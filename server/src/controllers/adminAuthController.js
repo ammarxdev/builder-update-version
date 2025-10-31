@@ -1,7 +1,13 @@
+// Admin Auth Controller
+// - Handles admin login and profile retrieval
+// - Issues JWT tokens with a payload flag (type: 'admin') to distinguish admin tokens
+// - Includes a helper to create a first admin (should be protected/removed in production)
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { Admin } from '../models/Admin.js';
 
+// Sign a short-lived admin token
+// Payload contains { id, role, type: 'admin' }
 const signAdminToken = (adminId, role) => {
   return jwt.sign(
     { id: adminId, role, type: 'admin' }, 
@@ -11,6 +17,9 @@ const signAdminToken = (adminId, role) => {
 };
 
 // Admin Login
+// - Validates username/password
+// - Verifies hash and updates lastLogin
+// - Returns { token, admin }
 export const adminLogin = async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -57,6 +66,7 @@ export const adminLogin = async (req, res) => {
 };
 
 // Get Admin Profile
+// - Requires adminAuth middleware (req.admin is set)
 export const getAdminProfile = async (req, res) => {
   try {
     const admin = await Admin.findById(req.admin.id).select('-passwordHash');
@@ -71,6 +81,7 @@ export const getAdminProfile = async (req, res) => {
 };
 
 // Create Admin (for initial setup)
+// - One-time helper to seed first admin account
 export const createAdmin = async (req, res) => {
   try {
     const { username, password } = req.body;

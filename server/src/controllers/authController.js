@@ -100,6 +100,11 @@ export const login = async (req, res) => {
     const ok = await bcrypt.compare(password, user.passwordHash);
     if (!ok) return res.status(401).json({ message: 'Incorrect password' });
     
+    // Blocked users cannot log in
+    if (user.isBlocked) {
+      return res.status(403).json({ message: 'Your account is blocked. Contact support.' });
+    }
+
     // Check if user is restricted
     if (user.status === 'Restricted') {
       return res.status(403).json({ message: 'Your account has been restricted. Please contact support.' });

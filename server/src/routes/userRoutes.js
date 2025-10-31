@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { adminAuth } from '../middleware/adminAuth.js';
 import { User } from '../models/User.js';
+import { Download } from '../models/Download.js';
 
 const router = Router();
 
@@ -10,8 +11,29 @@ router.get('/', adminAuth, async (req, res) => {
     const users = await User.find()
       .select('-passwordHash')
       .sort({ createdAt: -1 });
-    
-    res.json({ users });
+
+    // Aggregate per-user download counts to ensure accuracy even if totals were not incremented
+    const downloadCounts = await Download.aggregate([
+      { $group: { _id: '$user', count: { $sum: 1 } } }
+    ]);
+    const countsMap = new Map(downloadCounts.map(d => [String(d._id), d.count]));
+
+    const usersWithCounts = users.map(u => {
+      const count = countsMap.get(String(u._id)) ?? u.totalDownloads ?? 0;
+      return {
+        _id: u._id,
+        name: u.name,
+        email: u.email,
+        createdAt: u.createdAt,
+        lastActive: u.lastActive,
+        isActive: u.isActive,
+        status: u.status,
+        isBlocked: u.isBlocked,
+        totalDownloads: count,
+      };
+    });
+
+    res.json({ users: usersWithCounts });
   } catch (error) {
     console.error('Error fetching users:', error);
     res.status(500).json({ message: 'Server error' });

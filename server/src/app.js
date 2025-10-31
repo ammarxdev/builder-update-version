@@ -1,3 +1,9 @@
+// Express Application
+// - Configures security (helmet), logging (morgan), CORS, JSON parsing
+// - Serves static uploads (portfolio HTML files)
+// - Exposes public tracking endpoints (page views, clicks)
+// - Mounts API routes: auth, templates, projects, admin, analytics, users, portfolios, files
+
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
@@ -20,6 +26,8 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
+// Middleware Setup
+// - Security (helmet), logging (morgan), CORS, JSON parsing
 app.use(helmet());
 app.use(express.json({ limit: '2mb' }));
 app.use(
@@ -86,8 +94,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/templates', templateRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/admin', adminRoutes);
-app.use('/api/analytics', analyticsRoutes);
 app.use('/api/analytics', downloadRoutes);
+app.use('/api/analytics', analyticsRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/portfolios', portfolioRoutes);
 app.use('/api/files', fileRoutes);
